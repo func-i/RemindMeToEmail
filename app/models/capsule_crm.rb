@@ -20,7 +20,14 @@ class CapsuleCRM
       return
     end
 
-    party_response["parties"]["person"].each do |p|
+    partyArray = nil
+    if party_response["parties"]["person"].is_a?(Array)
+      partyArray = party_response["parties"]["person"]
+    else
+      partyArray = [party_response["parties"]["person"]]
+    end
+
+    partyArray.each do |p|
       c = Contact.where(:foreign_id => p['id']).first
       c = Contact.new if c.nil?
 
