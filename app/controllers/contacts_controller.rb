@@ -6,6 +6,7 @@ class ContactsController < ApplicationController
     @contacts = Contact.been_contacted_before
 
     params[:sort_order] ||= 'ASC'
+    params[:sort_by] ||= 'name'
 
     case params[:sort_by]
       when 'last_email_at'
