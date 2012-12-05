@@ -45,11 +45,13 @@ class CapsuleCRM
       tags_response = self.class.get("#{@base_uri}/api/party/#{c.external_id}/tag", base_options)
       if tags_response["tags"] && tags_response["tags"]["tag"]
 
-        itemsArray = nil
         if tags_response["tags"]["tag"].is_a?(Array)
-          c.tags = tags_response["tags"]["tag"].join(', ')
+          c.tags = ""
+          tags_response["tags"]["tag"].each do |t|
+            c.tags += t["name"]
+          end
         else
-          c.tags = tags_response["tags"]["tag"]
+          c.tags = tags_response["tags"]["tag"]["name"]
         end
       end
 
