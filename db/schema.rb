@@ -11,9 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205004738) do
+ActiveRecord::Schema.define(:version => 20121205020001) do
 
-  create_table "api_history", :force => true do |t|
+  create_table "api_histories", :force => true do |t|
     t.string   "api_name"
     t.integer  "contacts_downloaded"
     t.datetime "created_at",          :null => false
