@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  http_basic_authenticate_with :name => "func-i", :password => "func-i-2012" if Rails.env.staging?
-
   helper_method :sort_by?, :sort_by
 
   protected

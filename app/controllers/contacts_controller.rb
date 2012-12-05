@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+  http_basic_authenticate_with :name => "func-i", :password => "func-i-2012", :except => [:run_api_calls]
 
   def index
     @ready_to_contact_contacts = Contact.been_contacted_before.need_to_contact.all
