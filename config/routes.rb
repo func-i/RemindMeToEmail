@@ -1,6 +1,8 @@
 BoomerangButBetter::Application.routes.draw do
 
-  resources :contacts, :only => [:index, :update]
+  resources :contacts, :only => [:index, :update] do
+    get 'run_api_calls', :on => :collection
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -51,7 +53,7 @@ BoomerangButBetter::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'contacts#index'
 
   # See how all your routes lay out with "rake routes"
 

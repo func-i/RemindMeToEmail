@@ -12,8 +12,13 @@ class CapsuleCRM
     base_options = {:format => :xml}
 
     #query all users that have been updated since update_date
-    options = base_options.merge({"lastmodified" => update_date}) unless update_date.nil?
+    options = base_options.merge({:query => {:lastmodified => update_date.strftime('%Y%m%dT%H%M%S')}}) unless update_date.nil?
     party_response = self.class.get("#{@base_uri}/api/party", options || base_options)
+
+    if party_response["parties"].nil? || party_response["parties"]["person"].nil?
+      ApiHistory.create :contacts_downloaded => 0, :api_name => 'CapsuleCRM'
+      return
+    end
 
     party_response["parties"]["person"].each do |p|
       c = Contact.where(:foreign_id => p['id']).first
