@@ -1,8 +1,18 @@
 class ContactsController < ApplicationController
 
   def index
-    @contacts = Contact.order(:name).all
-    @ready_to_contact_contacts = Contact.ready_to_contact.all
+    @ready_to_contact_contacts = Contact.been_contacted_before.need_to_contact.all
+
+    @contacts = Contact.been_contacted_before
+
+    params[:sort_order] ||= 'ASC'
+
+    case params[:sort_by]
+      when 'last_email_at'
+        @contacts = @contacts.order("last_email_at #{params[:sort_order]}")
+      else
+        @contacts = @contacts.order("LOWER(name) #{params[:sort_order]}")
+    end
   end
 
   def update

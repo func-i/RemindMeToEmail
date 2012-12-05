@@ -1,1 +1,23 @@
 @import "bootstrap";
+
+a.sort-link {
+  .caret {
+    visibility: hidden;
+    &.reverse {
+      content: "\2191";
+      border-top: 0;
+      border-bottom: 4px solid #000;
+    }
+  }
+  &:hover {
+    .caret {
+      visibility: visible;
+      opacity: 0.1;
+    }
+  }
+  &.active {
+    .caret {
+      visibility: visible;
+    }
+  }
+}
