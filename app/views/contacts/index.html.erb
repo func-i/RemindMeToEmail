@@ -5,12 +5,14 @@
     <tr>
       <th>Name</th>
       <th>Email</th>
+      <th>Tags</th>
       <th>Time since last email</th>
     </tr>
     <% @ready_to_contact_contacts.each do |contact| %>
       <tr style="background-color: yellow">
         <td><%= contact.name %></td>
         <td><%= contact.email %></td>
+        <td><%= contact.tags %></td>
         <td>
           <%= distance_of_time_in_words_to_now(contact.last_email_at) unless contact.last_email_at.nil? %>
         </td>
@@ -27,10 +29,10 @@
   <tr>
     <th><%= table_sort_link "Name", :name %></th>
     <th>Email</th>
-    <!--th>Time since their last email</th>
-    <th>Time since our last email</th-->
+    <th><%= table_sort_link "Tags", :tags %></th>
     <th><%= table_sort_link "Time since last email", :last_email_at %></th>
     <th>Days before reminder</th>
+    <th><%= table_sort_link "Days til next reminder", :next_reminder %></th>
   </tr>
   <% @contacts.each do |c| %>
     <%= render c %>

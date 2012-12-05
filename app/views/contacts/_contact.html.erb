@@ -1,6 +1,7 @@
     <tr>
       <td><%= contact.name %></td>
       <td><%= contact.email %></td>
+      <td><%= contact.tags %></td>
       <td>
         <%= distance_of_time_in_words_to_now(contact.last_email_at) unless contact.last_email_at.nil? %>
       </td>
@@ -8,5 +9,8 @@
         <%= form_for contact, :remote => true do |f| %>
           <%= f.text_field :days_before_reminder, :class=>"days-before-reminder" %>
         <% end %>
+      </td>
+      <td>
+        <%= contact.days_before_reminder - (((contact.last_email_at - Time.now).abs)/60/1440.0).round unless contact.last_email_at.nil? || contact.days_before_reminder.nil? %>
       </td>
     </tr>

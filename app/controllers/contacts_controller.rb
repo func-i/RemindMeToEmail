@@ -12,6 +12,10 @@ class ContactsController < ApplicationController
     case params[:sort_by]
       when 'last_email_at'
         @contacts = @contacts.order("last_email_at #{params[:sort_order]}")
+      when 'tags'
+        @contacts = @contacts.order("tags #{params[:sort_order]} NULLS LAST")
+      when 'next_reminder'
+        @contacts = @contacts.order_by_time_until_next_contact(params[:sort_order])
       else
         @contacts = @contacts.order("LOWER(name) #{params[:sort_order]}")
     end
