@@ -43,7 +43,7 @@ class CapsuleCRM
 
         itemsArray.each do |h|
           datetime = DateTime.parse(h["entryDate"])
-          c.last_email_we_sent_at = datetime if c.last_email_we_sent_at.nil? || c.last_email_we_sent_at < datetime
+          c.last_email_at = datetime if c.last_email_at.nil? || c.last_email_at < datetime
         end
 
       end

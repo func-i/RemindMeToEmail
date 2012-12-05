@@ -12,7 +12,7 @@
         <td><%= contact.name %></td>
         <td><%= contact.email %></td>
         <td>
-          <%= distance_of_time_in_words_to_now(contact.last_email_we_sent_at) unless contact.last_email_we_sent_at.nil? %>
+          <%= distance_of_time_in_words_to_now(contact.last_email_at) unless contact.last_email_at.nil? %>
         </td>
       </tr>
     <% end %>
