@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205020001) do
+ActiveRecord::Schema.define(:version => 20121205171216) do
 
   create_table "api_histories", :force => true do |t|
     t.string   "api_name"
@@ -23,11 +23,12 @@ ActiveRecord::Schema.define(:version => 20121205020001) do
   create_table "contacts", :force => true do |t|
     t.string   "email"
     t.string   "name"
-    t.integer  "foreign_id"
+    t.integer  "external_id"
     t.datetime "last_email_at"
     t.integer  "days_before_reminder"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.string   "tags"
   end
 
 end

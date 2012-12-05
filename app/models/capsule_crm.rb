@@ -28,10 +28,10 @@ class CapsuleCRM
     end
 
     partyArray.each do |p|
-      c = Contact.where(:foreign_id => p['id']).first
+      c = Contact.where(:external_id => p['id']).first
       c = Contact.new if c.nil?
 
-      c.foreign_id = p['id']
+      c.external_id = p['id']
       c.name = "#{p['firstName']} #{p['lastName']}"
 
       if p["contacts"] && p["contacts"]["email"]
@@ -42,8 +42,18 @@ class CapsuleCRM
         end
       end
 
-      history_response = self.class.get("#{@base_uri}/api/party/#{c.foreign_id}/history", base_options)
+      tags_response = self.class.get("#{@base_uri}/api/party/#{c.external_id}/tag", base_options)
+      if tags_response["tags"] && tags_response["tags"]["tag"]
 
+        itemsArray = nil
+        if tags_response["tags"]["tag"].is_a?(Array)
+          c.tags = tags_response["tags"]["tag"].join(', ')
+        else
+          c.tags = tags_response["tags"]["tag"]
+        end
+      end
+
+      history_response = self.class.get("#{@base_uri}/api/party/#{c.external_id}/history", base_options)
       if history_response["history"] && history_response["history"]["historyItem"]
 
         itemsArray = nil
