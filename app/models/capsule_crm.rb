@@ -48,7 +48,7 @@ class CapsuleCRM
         if tags_response["tags"]["tag"].is_a?(Array)
           c.tags = ""
           tags_response["tags"]["tag"].each do |t|
-            c.tags += t["name"]
+            c.tags += t["name"] + ", "
           end
         else
           c.tags = tags_response["tags"]["tag"]["name"]

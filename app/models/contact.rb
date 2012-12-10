@@ -6,6 +6,9 @@ class Contact < ActiveRecord::Base
 
   scope :been_contacted_before, lambda{ where("last_email_at IS NOT NULL") }
 
+  scope :been_contacted_before_or_tagged, lambda{ where("last_email_at IS NOT NULL OR tags IS NOT NULL") }
+
+
   scope :order_by_time_until_next_contact, lambda{ |sort_order = "ASC"|
     order("days_before_reminder - date_part('days', now() - last_email_at) #{sort_order} NULLS LAST")
   }
