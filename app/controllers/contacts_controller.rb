@@ -4,7 +4,7 @@ class ContactsController < ApplicationController
   def index
     @ready_to_contact_contacts = Contact.been_contacted_before_or_tagged.need_to_contact.all
 
-    @contacts = Contact.been_contacted_before
+    @contacts = Contact.been_contacted_before_or_tagged
 
     params[:sort_order] ||= 'ASC'
     params[:sort_by] ||= 'name'
