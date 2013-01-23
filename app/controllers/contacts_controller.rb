@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  http_basic_authenticate_with :name => "func-i", :password => "func-i-2012", :except => [:run_api_calls]
+  http_basic_authenticate_with(:name => ENV['username'], :password => ENV['password'], :except => [:run_api_calls])
 
   def index
     @ready_to_contact_contacts = Contact.been_contacted_before_or_tagged.need_to_contact.all
@@ -28,9 +28,9 @@ class ContactsController < ApplicationController
   end
 
   def run_api_calls
-    puts "Updating contacts from Capsule (func-i, f4f1aab0799124b56ddfed44f59fc6c5)"
+    puts "Updating contacts from Capsule"
 
-    c = CapsuleCRM.new('func-i','f4f1aab0799124b56ddfed44f59fc6c5')
+    c = CapsuleCRM.new('func-i',ENV['capsule_key'])
     update_since = ApiHistory.last.created_at - 1.hour if ApiHistory.last
     c.update_contacts_updated_since(update_since || nil)
 
