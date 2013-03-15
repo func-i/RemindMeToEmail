@@ -44,6 +44,6 @@ class ContactsController < ApplicationController
 
     UserMailer.summary_email(contacts).deliver
 
-    render :nothing
+    render :text => "Sent summary email with #{contacts.count} contacts ready to be reached"
   end
 end
