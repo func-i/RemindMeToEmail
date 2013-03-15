@@ -2,6 +2,7 @@ BoomerangButBetter::Application.routes.draw do
 
   resources :contacts, :only => [:index, :update] do
     get 'run_api_calls', :on => :collection
+    get 'send_summary_emails', :on => :collection
   end
 
   # The priority is based upon order of creation:

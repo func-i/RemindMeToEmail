@@ -38,4 +38,12 @@ class ContactsController < ApplicationController
 
     render :text => "Downloaded #{ApiHistory.last.contacts_downloaded} contacts"
   end
+
+  def send_summary_emails
+    contacts = Contact.been_contacted_before_or_tagged.need_to_contact.order_by_time_until_next_contact.all
+
+    UserMailer.summary_email(contacts).deliver
+
+    render :nothing
+  end
 end
