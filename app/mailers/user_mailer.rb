@@ -4,6 +4,6 @@ class UserMailer < ActionMailer::Base
   def summary_email(contacts)
     @contacts = contacts
 
-    mail(:to => ENV['summary_email_address'], :subject => "Email Reminders Summary")
+    mail(:to => ENV['summary_email_address'].split(','), :subject => "Email Reminders Summary")
   end
 end
