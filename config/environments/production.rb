@@ -64,4 +64,13 @@ BoomerangButBetter::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  config.action_mailer.smtp_settings = {
+   :address              => "email-smtp.us-east-1.amazonaws.com",
+   :port                 => 587,
+   :user_name            => ENV['ses_user_name'],
+   :password             => ENV['ses_password'],
+   :authentication       => 'plain',
+   :enable_starttls_auto => true
+ }
 end

@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => "summary@EmailReminders.com"
+  default :from => "kvirani@func-i.com"
 
   def summary_email(contacts)
     @contacts = contacts
