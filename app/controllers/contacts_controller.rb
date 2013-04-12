@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  http_basic_authenticate_with(:name => ENV['username'], :password => ENV['password'], :except => [:run_api_calls])
+  http_basic_authenticate_with(:name => ENV['username'], :password => ENV['password'], :except => [:run_api_calls, :send_summary_emails])
 
   def index
     @ready_to_contact_contacts = Contact.been_contacted_before_or_tagged.need_to_contact.all
